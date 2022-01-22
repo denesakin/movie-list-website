@@ -1,0 +1,941 @@
+{
+	"info": {
+		"_postman_id": "71c1f797-fa8d-4e87-8e09-e3bfccd663d3",
+		"name": "server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST /api/movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 201\", function () {",
+							"  pm.response.to.have.status(201);",
+							"});",
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"movieId\", jsonData._id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test movie7\",\n    \"genre\": \"drama\",\n    \"poster\": \"https://images-na.ssl-images-amazon.com/images/I/8150KG7y2EL.jpg\",\n    \"imdbRating\": 9.1, \n    \"description\": \"test description\",\n    \"duration\": 121,\n    \"releaseDate\": \"2020-12-09\",\n    \"director\": \"618905a4a1e6034706ff0388\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/movies",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /api/series",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 201\", function () {",
+							"  pm.response.to.have.status(201);",
+							"});",
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"seriesId\", jsonData._id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test serie\",\n    \"genre\": \"Action\",\n    \"poster\": \"https://m.media-amazon.com/images/M/MV5BMzgxMmQxZjQtNDdmMC00MjRlLTk1MDEtZDcwNTdmOTg0YzA2XkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_.jpg\",\n    \"imdbRating\": 7.9, \n    \"description\": \"Hacker hacks people\",\n    \"seasons\": 5,\n    \"releaseDate\": \"2015-09-20\",\n    \"director\": \"616ab1f88dff003c7de52fd4\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/series",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"series"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /api/directors",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 201\", function () {",
+							"  pm.response.to.have.status(201);",
+							"});",
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"directorId\", jsonData._id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"test director\",\n    \"biography\": \"Fake biography\",\n    \"image\": \"https://i1.sndcdn.com/artworks-000225300908-imolq8-t500x500.jpg\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/directors",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"directors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /api/directors/:director_id/movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 201\", function () {",
+							"  pm.response.to.have.status(201);",
+							"});",
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"movieId\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"relationship test movie\",\n    \"genre\": \"action\",\n    \"poster\": \"image url\",\n    \"imdbRating\": 8.1, \n    \"description\": \"good movie\",\n    \"duration\": 97,\n    \"releaseDate\": \"2004-12-09\",\n    \"director\": \"{{directorId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/directors/{{directorId}}/movies?director_id={{directorId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"directors",
+						"{{directorId}}",
+						"movies"
+					],
+					"query": [
+						{
+							"key": "director_id",
+							"value": "{{directorId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/movies",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/movies/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/movies/{{movieId}}?id={{movieId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"movies",
+						"{{movieId}}"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{movieId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/series",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/series",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"series"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/series/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/series/{{seriesId}}?id={{seriesId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"series",
+						"{{seriesId}}"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{seriesId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/directors",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/directors",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"directors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/directors/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/directors/{{directorId}}?id={{directorId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"directors",
+						"{{directorId}}"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{directorId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/directors/:director_id/movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/directors/{{directorId}}/movies?director_id={{directorId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"directors",
+						"{{directorId}}",
+						"movies"
+					],
+					"query": [
+						{
+							"key": "director_id",
+							"value": "{{directorId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /api/movies/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"movieId\", jsonData._id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test\",\n    \"genre\": \"drama, action\",\n    \"poster\": \"https://images.photowall.com/products/51078/movie-poster-jaws.jpg?h=699&q=85\",\n    \"imdbRating\": 23, \n    \"description\": \"In 21sdf3123this moviesdf someone dies\",\n    \"duration\": 123,\n    \"releaseDate\": \"2002-12-09\",\n    \"director\": \"619112c1bf2f32821c05e1bd\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/movies/{{movieId}}/?id={{movieId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"movies",
+						"{{movieId}}",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{movieId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /api/series/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"seriesId\", jsonData._id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test\",\n    \"genre\": \"drama, action\",\n    \"poster\": \"https://images.photowall.com/products/51078/movie-poster-jaws.jpg?h=699&q=85\",\n    \"imdbRating\": 23, \n    \"description\": \"In 21sdf3123this moviesdf someone dies\",\n    \"seasons\": 1,\n    \"releaseDate\": \"2002-12-09\",\n    \"director\": \"619112c1bf2f32821c05e1bd\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/series/{{seriesId}}/?id={{seriesId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"series",
+						"{{seriesId}}",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{seriesId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /api/directors/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"test relationsbips\",\n    \"biography\": \"updated biography\",\n    \"image\": \"url\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/directors/{{directorId}}/?id={{directorId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"directors",
+						"{{directorId}}",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{directorId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /api/movies/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/movies/{{movieId}}?id={{movieId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"movies",
+						"{{movieId}}"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{movieId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /api/series/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/series/{{seriesId}}?id={{seriesId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"series",
+						"{{seriesId}}"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{seriesId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /api/directors/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/directors/{{directorId}}?id={{directorId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"directors",
+						"{{directorId}}"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{directorId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /api/movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/movies",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /api/series",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/series",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"series"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /api/directors",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code: 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/directors",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"directors"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}

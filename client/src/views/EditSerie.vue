@@ -1,0 +1,240 @@
+<template>
+  <div class="edit-container">
+    <div class="headers" :key="(serieId = $route.params.id)">
+      <h1>Edit or delete a serie!</h1>
+    </div>
+    <form>
+      <div class="row">
+        <div class="label-col">
+          <label for="name">Name</label>
+        </div>
+        <div class="input-col">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="e.g. Batman Begins"
+            v-model="edits.name"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label-col">
+          <label for="genre">Genre</label>
+        </div>
+        <div class="input-col">
+          <input
+            type="text"
+            id="genre"
+            name="genre"
+            placeholder="e.g. Action, Drama"
+            v-model="edits.genre"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label-col">
+          <label for="poster">Poster</label>
+        </div>
+        <div class="input-col">
+          <input
+            type="url"
+            id="poster"
+            name="poster"
+            placeholder="e.g. https://static.wikia.nocookie.net/marvel_dc/images/4/4b/Batman_Vol_3_86_Textless.jpg"
+            v-model="edits.poster"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label-col">
+          <label for="imdbRating">IMDB Rating</label>
+        </div>
+        <div class="input-col">
+          <input
+            type="number"
+            id="imdbRating"
+            name="imdbRating"
+            placeholder="e.g. 9.1"
+            step="0.01"
+            v-model="edits.imdbRating"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label-col">
+          <label for="duration">Seasons</label>
+        </div>
+        <div class="input-col">
+          <input
+            type="number"
+            id="duration"
+            name="duration"
+            placeholder="e.g. 120"
+            v-model="edits.seasons"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label-col">
+          <label for="releaseDate">Release Date</label>
+        </div>
+        <div class="input-col">
+          <input
+            type="date"
+            id="releaseDate"
+            name="releaseDate"
+            placeholder="e.g. 12-08-2010"
+            v-model="edits.releaseDate"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label-col">
+          <label for="director">Director ID</label>
+        </div>
+        <div class="input-col">
+          <input
+            type="text"
+            id="director"
+            name="director"
+            placeholder="e.g. s3Hkr7JBJH6Bj6B7k"
+            v-model="edits.director"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label-col">
+          <label for="description">Description</label>
+        </div>
+        <div class="input-col">
+          <input
+            type="text"
+            id="description"
+            name="description"
+            placeholder="e.g. A nice movie where batman..."
+            style="height:175px"
+            v-model="edits.description"
+          />
+        </div>
+      </div>
+
+      <div class="submit">
+        <button id="button" class="btn btn-primary mr-1" v-on:click="putSerie">
+          Edit
+        </button>
+      </div>
+    </form>
+    <div class="delete-but">
+      <b-button
+        id="delete-button"
+        class="btn btn-danger mr-1"
+        v-on:click="deleteSerie"
+        >Delete</b-button
+      >
+    </div>
+  </div>
+</template>
+
+<script>
+import { Api } from '@/Api'
+
+export default {
+  name: 'editSerie',
+  methods: {
+    putSerie() {
+      Api.put('/series/' + this.serieId, this.edits)
+    },
+    deleteSerie() {
+      Api.delete('/series/' + this.serieId)
+    }
+  },
+  data() {
+    return {
+      edits: {
+        name: null,
+        poster: null,
+        genre: null,
+        imdbRating: null,
+        description: null,
+        seasons: null,
+        releaseDate: null,
+        director: null
+      }
+    }
+  }
+}
+</script>
+
+<style>
+input[type='text'],
+input[type='date'],
+input[type='url'],
+input[type='number'] {
+  width: 75%;
+  padding: 12px;
+  border: 1px solid rgb(151, 151, 151);
+  border-radius: 5px;
+  resize: vertical;
+}
+
+label {
+  padding: 10px 10px 10px;
+  display: inline-block;
+}
+
+.submit {
+  text-align: center;
+}
+
+.edit-container {
+  border-radius: 5px;
+  background-color: #b5cbec;
+  padding: 15px;
+  margin: 25px;
+}
+
+.label-col {
+  float: left;
+  width: 15%;
+  margin-top: 6px;
+}
+
+.input-col {
+  float: left;
+  width: 85%;
+  margin-top: 6px;
+}
+
+.headers {
+  margin-bottom: 20px;
+}
+
+.delete-but {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#delete-button {
+  width: 20%;
+}
+
+@media screen and (max-width: 500px) {
+  .label-col,
+  .input-col,
+  #button,
+  .delete-but {
+    width: 100%;
+    margin-top: 20px;
+    float: none;
+    text-align: center;
+  }
+}
+</style>
