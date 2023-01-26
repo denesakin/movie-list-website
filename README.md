@@ -1,7 +1,7 @@
 
 ### Purpose
 
-The website will allow the user to see list of movies and series. The website will show details about both upcoming and released movies/series. Users also will be able to see more detailed information about directors, such as a short biography, image and a list of movies/series directed by them. Team of 2 members worked on this project, which was a part of DIT341 Web and Mobile Development in University of Gothenburg & Chalmers.
+The website will allow the user to see list of movies and series. The website will show details about both upcoming and released movies/series. Users also will be able to see more detailed information about directors, such as a short biography, image and a list of movies/series directed by them. Team of 2 members worked on this project, which was a part of DIT341 Web and Mobile Development in University of Gothenburg & Chalmers as an introduction to Web Development.
 
 ### Pages
 
